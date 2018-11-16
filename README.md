@@ -6,7 +6,6 @@ This is the project repo for CPSC 311. Please check the Projects tab for ongoing
 * All work is to be done on branches and merged in via. pull requests with at least one approval.
 * Minor items may be pushed directly to master (such as edits to the readme, etc..).
 * master should reflect the state of the latest *working* copy.
-* All work involving AspectJ and Aspect-oriented Programming is to be done + merged onto the [aop-refactored](https://github.com/jyoo980/aop-spaceinvaders/tree/aop-refactored) branch.
 
 ### Compiling using Maven 
 ```bash
