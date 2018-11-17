@@ -11,15 +11,15 @@ public aspect ResourceLogger {
 	private final Logger Log = Logger.getInstance();
 	
 	pointcut getSound(String name): execution(AudioClip ResourceLoader.getSound(..)) && args(name);
-	pointcut getSprite(String name): execution(BufferedImage ResourceLoader.getSprite(..)) && args(name);
+	pointcut getSprite(String name): call(BufferedImage ResourceLoader.getSprite(..)) && args(name);
 	
 	after(String name): getSound(name) {
 		Log.trace("Loading sound file: " + name);
 	}
 
-	// TODO: Find out why this is repeating logging so much
-//	after(String name): getSprite(name) {
-//		Log.trace("Loading image file: " + name);
-//	}
+	after(String name): getSprite(name) {
+		// TODO: This generates an ungodly amount of output, need to figure out why, probably something to do with the buffer
+		Log.trace("Loading sound file: " + name);
+	}
 
 }
