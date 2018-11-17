@@ -13,13 +13,14 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 
-public class ResourceLoader implements ImageObserver {
+import util.Logger;
 
+public class ResourceLoader implements ImageObserver {
 	
+	private static final Logger LOGGER = Logger.getInstance();
+	private static ResourceLoader instance = new ResourceLoader();
 	private Map<String,BufferedImage> images = new HashMap<String,BufferedImage>();
 	private Map<String,AudioClip> sounds = new HashMap<String,AudioClip>();
-
-	private static ResourceLoader instance = new ResourceLoader();
 	
 
 	private ResourceLoader() {}
@@ -43,9 +44,10 @@ public class ResourceLoader implements ImageObserver {
 		try {
 			url = getClass().getClassLoader().getResource("res/" + name);
 			sound = Applet.newAudioClip(url);
-			sounds.put(name,sound);			
+			sounds.put(name,sound);		
+			LOGGER.trace("Loaded sound file: " + name);
 		} catch (Exception e) {
-			System.err.println("Cound not locate sound " + name + ": " + e.getMessage());			
+			LOGGER.error("Cound not locate sound " + name + ": " + e.getMessage());
 		}		
 		
 		return sound;
@@ -84,9 +86,10 @@ public class ResourceLoader implements ImageObserver {
 			BufferedImage compatible = createCompatible(image.getWidth(), image.getHeight(), Transparency.BITMASK);
 			compatible.getGraphics().drawImage(image, 0,0,this);
 
-			images.put(name,compatible);			
+			images.put(name,compatible);
+			LOGGER.trace("Loaded image file: " + name );	
 		} catch (Exception e) {
-			System.err.println("Cound not locate image " + name + ": " + e.getMessage());			
+			LOGGER.error("Cound not locate image " + name + ": " + e.getMessage());
 		}		
 		
 		return image;

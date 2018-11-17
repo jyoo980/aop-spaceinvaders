@@ -25,10 +25,12 @@ import actors.Invader;
 import actors.Player;
 import actors.Shot;
 import actors.Ufo;
+import util.Logger;
 
 public class Invaders extends Stage implements KeyListener {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = Logger.getInstance();
 
 	private Player player;
 	private InputHandler keyPressedHandler;
@@ -106,6 +108,7 @@ public class Invaders extends Stage implements KeyListener {
 				actors.add(inv);
 			}
 		}
+		LOGGER.info(String.format("Instantiated %d Invaders", rows*unitsPerRow));
 	}
 
 	public void initWorld() {
@@ -222,7 +225,9 @@ public class Invaders extends Stage implements KeyListener {
 				checkCollision(actor);
 
 			if (actor.isMarkedForRemoval()) {
-				player.updateScore(actor.getPointValue());
+				int pointValue = actor.getPointValue();
+				if (pointValue > 0) LOGGER.info(String.format("Player has destroyed an enemy worth %d points", actor.getPointValue()));
+				player.updateScore(pointValue);
 				actors.remove(i);
 			}
 			else {
@@ -274,10 +279,12 @@ public class Invaders extends Stage implements KeyListener {
 				backgroundY = backgroundTile.getHeight();
 
 			if (super.gameOver) {
+				LOGGER.info("Player has lost the game");
 				paintGameOver();
 				break;
 			}
 			else if (super.gameWon) {
+				LOGGER.info("Player has won the game");
 				paintGameWon();
 				break;
 			}
