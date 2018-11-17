@@ -45,7 +45,7 @@ public class ResourceLoader implements ImageObserver {
 			url = getClass().getClassLoader().getResource("res/" + name);
 			sound = Applet.newAudioClip(url);
 			sounds.put(name,sound);		
-			LOGGER.trace("Loaded sound file: " + name);
+//			LOGGER.trace("Loaded sound file: " + name);
 		} catch (Exception e) {
 			LOGGER.error("Cound not locate sound " + name + ": " + e.getMessage());
 		}		

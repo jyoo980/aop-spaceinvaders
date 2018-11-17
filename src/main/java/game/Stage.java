@@ -17,8 +17,8 @@ public class Stage extends Canvas implements ImageObserver {
 	public static final int HEIGHT = 480;
 	public static final int DESIRED_FPS = 50; 
 	
-	protected boolean gameWon = false;
-	protected boolean gameOver = false;
+	public boolean gameWon = false;
+	public boolean gameOver = false;
 	public List<Actor> actors = new ArrayList<Actor>();	
 	
 	public Stage() {
