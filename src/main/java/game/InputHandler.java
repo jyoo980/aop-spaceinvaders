@@ -12,7 +12,7 @@ import util.Logger;
  */
 public class InputHandler {
 
-	public Invaders invaders = null;
+	private Invaders invaders = null;
 	private Player player  = null;
 	private static final Logger LOGGER = Logger.getInstance();
 	public Action action;

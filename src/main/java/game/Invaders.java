@@ -278,12 +278,12 @@ public class Invaders extends Stage implements KeyListener {
 			if (backgroundY < 0)
 				backgroundY = backgroundTile.getHeight();
 
-			if (super.gameOver) {
+			if (this.gameOver()) {
 				LOGGER.info("Player has lost the game");
 				paintGameOver();
 				break;
 			}
-			else if (super.gameWon) {
+			else if (this.gameWon()) {
 				LOGGER.info("Player has won the game");
 				paintGameWon();
 				break;
@@ -330,5 +330,13 @@ public class Invaders extends Stage implements KeyListener {
 	public static void main(String[] args) {
 		Invaders inv = new Invaders();
 		inv.game();
+	}
+	
+	private boolean gameOver() {
+		return super.gameOver;
+	}
+	
+	private boolean gameWon() {
+		return super.gameWon;
 	}
 }
