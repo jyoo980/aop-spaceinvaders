@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import actors.Invader;
 import game.InputHandler;
 import game.Invaders;
+import actors.*;
 import game.InputHandler.Action;
 
 privileged aspect InvadersLogger {
@@ -17,9 +18,11 @@ privileged aspect InvadersLogger {
 	pointcut invaderConstructor(): call(Invader.new(..));
 	pointcut addInvaders(): execution(void Invaders.addInvaders(..));
 	pointcut game(Invaders inv): execution(void Invaders.game(..)) && target(inv);
+	pointcut markedForRemoval(Actor actr):
+		target(actr) && call(boolean Actor.isMarkedForRemoval(..)) && withincode(void Invaders.updateWorld(..));
 	pointcut handleInput(InputHandler h, KeyEvent ev):
 		target(h) && execution(void InputHandler.handleInput(..)) && args(ev);
-	
+		
 	after(): invaderConstructor() {
 		this.invaderNumSoFar++;
 	}
@@ -36,6 +39,15 @@ privileged aspect InvadersLogger {
 				}
 			} else {
 				Log.info(String.format("Player pressed key %s", this.formatInputString(ev)));
+			}
+		}
+	}
+	
+	after(Actor actr): markedForRemoval(actr) {
+		if (actr.isMarkedForRemoval()) {
+			int pointVal = actr.getPointValue();
+			if (pointVal > 0) {
+				Log.info("Player destroyed enemy worth: " + pointVal + " pts");
 			}
 		}
 	}

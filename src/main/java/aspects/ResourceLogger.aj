@@ -18,8 +18,9 @@ public aspect ResourceLogger {
 	}
 
 	after(String name): getSprite(name) {
-		// TODO: This generates an ungodly amount of output, need to figure out why, probably something to do with the buffer
-		Log.trace("Loading sound file: " + name);
+		// TODO: This generates an ungodly amount of output, need to figure out why, 
+		// probably something to do with the buffer
+		// Log.trace("Loading sound file: " + name);
 	}
 
 }
