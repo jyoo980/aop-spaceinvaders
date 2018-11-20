@@ -41,15 +41,12 @@ public class ResourceLoader implements ImageObserver {
 			return sound;
 		
 		URL url = null;
-		try {
-			url = getClass().getClassLoader().getResource("res/" + name);
-			sound = Applet.newAudioClip(url);
-			sounds.put(name,sound);		
-//			LOGGER.trace("Loaded sound file: " + name);
-		} catch (Exception e) {
-			LOGGER.error("Cound not locate sound " + name + ": " + e.getMessage());
-		}		
-		
+
+		url = getClass().getClassLoader().getResource("res/" + name);
+		sound = Applet.newAudioClip(url);
+		sounds.put(name,sound);		
+//		LOGGER.trace("Loaded sound file: " + name);
+
 		return sound;
 	}
 	
@@ -79,19 +76,16 @@ public class ResourceLoader implements ImageObserver {
 			return image;
 		
 		URL url = null;
-		try {
-			url = getClass().getClassLoader().getResource("res/" + name);
-			image = ImageIO.read(url);
-			//store a compatible image instead of the original format
-			BufferedImage compatible = createCompatible(image.getWidth(), image.getHeight(), Transparency.BITMASK);
-			compatible.getGraphics().drawImage(image, 0,0,this);
-
-			images.put(name,compatible);
-			LOGGER.trace("Loaded image file: " + name );	
-		} catch (Exception e) {
-			LOGGER.error("Cound not locate image " + name + ": " + e.getMessage());
-		}		
 		
+		url = getClass().getClassLoader().getResource("res/" + name);
+		image = ImageIO.read(url);
+		//store a compatible image instead of the original format
+		BufferedImage compatible = createCompatible(image.getWidth(), image.getHeight(), Transparency.BITMASK);
+		compatible.getGraphics().drawImage(image, 0,0,this);
+
+		images.put(name,compatible);
+		LOGGER.trace("Loaded image file: " + name );	
+
 		return image;
 	}
 	
