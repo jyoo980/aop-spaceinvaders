@@ -12,7 +12,6 @@ privileged aspect ExceptionsHandler {
 	
 	private final Logger Log = Logger.getInstance();
 	
-	
 	pointcut soundLoadingException(String name, ResourceLoader rl): 
 		call(AudioClip ResourceLoader.getSound(..)) && args(name) && target(rl);
 	pointcut spriteLoadingException(String name, ResourceLoader rl):
@@ -34,10 +33,6 @@ privileged aspect ExceptionsHandler {
 			Log.error("Cound not locate image " + name + ": " + e.getMessage());
 		}
 		return rl.images.get(name);
-	}
-	
-	before(): game() {
-		Log.error("Could not put thread to sleep");
 	}
 	
 	after() throwing(InterruptedException exn): threadCall() {
