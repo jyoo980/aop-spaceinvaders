@@ -307,11 +307,7 @@ public class Invaders extends Stage implements KeyListener {
 			if (usedTime == 0) usedTime = 1;
 			int timeDiff = (int) ((1000/usedTime) - DESIRED_FPS);
 			if (timeDiff > 0) {
-				try {
-					Thread.sleep(timeDiff/100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				Thread.sleep(timeDiff/100);
 			}
 		}
 	}
