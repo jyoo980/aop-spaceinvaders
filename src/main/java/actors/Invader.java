@@ -44,8 +44,8 @@ public class Invader extends Actor {
 				fire();
 		}
 		
-		updateXSpeed();
-		updateYSpeed();
+//		updateXSpeed();
+//		updateYSpeed();
 	}
 		
 	public void setLeftWall(int leftWall) {
