@@ -20,8 +20,8 @@ public class Ufo extends Actor {
 	
 	public void act() {
 		super.act();
-		updateXSpeed();
-		updateYSpeed();
+//		updateXSpeed();
+//		updateYSpeed();
 	}
 		
 	private void updateXSpeed() {
