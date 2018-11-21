@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class Player extends Actor {
 	
 	private boolean up,down,left,right;
-	private int score = 0;
+//	private int score = 0;
 	
 	public Player(Stage stage) {
 		super(stage);
@@ -104,11 +104,11 @@ public class Player extends Actor {
 		playSound("photon.wav");
 	}
 
-	public void updateScore(int score) {
-		this.score += score;
-	}
-
-	public int getScore() {
-		return score;
-	}
+//	public void updateScore(int score) {
+//		this.score += score;
+//	}
+//
+//	public int getScore() {
+//		return score;
+//	}
 }

@@ -151,8 +151,8 @@ public class Invaders extends Stage implements KeyListener {
 		}
 
 		player.paint(g);
-		paintScore(g);
-		paintFPS(g);
+//		paintScore(g);
+//		paintFPS(g);
 		//swap buffer
 		strategy.show();
 	}
@@ -162,7 +162,7 @@ public class Invaders extends Stage implements KeyListener {
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 
-		paintScore(g);
+//		paintScore(g);
 
 		//about 310 pixels wide
 		g.setFont(new Font("Arial",Font.BOLD,50));
@@ -182,7 +182,7 @@ public class Invaders extends Stage implements KeyListener {
 		g.setColor(getBackground());
 		g.fillRect(0, 0, getWidth(), getHeight());
 
-		paintScore(g);
+//		paintScore(g);
 
 		//about 300 pixels wide
 		g.setFont(new Font("Arial",Font.BOLD,50));
@@ -205,13 +205,13 @@ public class Invaders extends Stage implements KeyListener {
 			g.drawString("--- fps",0,Stage.HEIGHT-50);
 	}
 
-	public void paintScore(Graphics g) {
-		g.setFont(new Font("Arial",Font.BOLD,20));
-		g.setColor(Color.green);
-		g.drawString("Score: ",20,20);
-		g.setColor(Color.red);
-		g.drawString("" + player.getScore(), 100, 20);
-	}
+//	public void paintScore(Graphics g) {
+//		g.setFont(new Font("Arial",Font.BOLD,20));
+//		g.setColor(Color.green);
+//		g.drawString("Score: ",20,20);
+//		g.setColor(Color.red);
+//		g.drawString("" + player.getScore(), 100, 20);
+//	}
 
 	public void paint(Graphics g) {}
 
@@ -225,9 +225,9 @@ public class Invaders extends Stage implements KeyListener {
 				checkCollision(actor);
 
 			if (actor.isMarkedForRemoval()) {
-				int pointValue = actor.getPointValue();
-				if (pointValue > 0) LOGGER.info(String.format("Player has destroyed an enemy worth %d points", actor.getPointValue()));
-				player.updateScore(pointValue);
+//				int pointValue = actor.getPointValue();
+//				if (pointValue > 0) LOGGER.info(String.format("Player has destroyed an enemy worth %d points", actor.getPointValue()));
+//				player.updateScore(pointValue);
 				actors.remove(i);
 			}
 			else {
