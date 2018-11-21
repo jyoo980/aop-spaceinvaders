@@ -13,13 +13,15 @@ privileged aspect ExceptionsHandler {
 	private final Logger Log = Logger.getInstance();
 	
 	
-	pointcut soundLoadingException(String name, ResourceLoader rl): call(AudioClip ResourceLoader.getSound(..)) 
-		&& args(name) && target(rl);
-	pointcut spriteLoadingException(String name, ResourceLoader rl): execution(BufferedImage ResourceLoader.getSprite(..)) 
-		&& args(name) && target(rl);
+	pointcut soundLoadingException(String name, ResourceLoader rl): 
+		call(AudioClip ResourceLoader.getSound(..)) && args(name) && target(rl);
+	pointcut spriteLoadingException(String name, ResourceLoader rl):
+		execution(BufferedImage ResourceLoader.getSprite(..)) && args(name) && target(rl);
 	pointcut game(): within(Invaders) && handler(InterruptedException);
+	pointcut threadCall(): call(void Thread.sleep(..)) && within(Invaders);
 	
 	declare soft : IOException : execution(BufferedImage ResourceLoader.getSprite(..));
+	declare soft : Exception : threadCall();
 	
 	after(String name, ResourceLoader rl) throwing(Exception e): soundLoadingException(name, rl) {
 		Log.error("Cound not locate sound " + name + ": " + e.getMessage());
@@ -36,5 +38,10 @@ privileged aspect ExceptionsHandler {
 	
 	before(): game() {
 		Log.error("Could not put thread to sleep");
+	}
+	
+	after() throwing(InterruptedException exn): threadCall() {
+		Log.error(exn.getMessage());
+		exn.printStackTrace();		
 	}
 }
