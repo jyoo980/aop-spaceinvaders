@@ -26,8 +26,9 @@ public aspect Scoreboard {
 	after(Actor actor, boolean isMarked): target(actor) && hit(isMarked) {
 		if (isMarked) {
 			int pointValue = actor.getPointValue();
-			if (pointValue > 0) LOGGER.info(String.format("Player has destroyed an enemy worth %d points", actor.getPointValue()));
-			score += pointValue;
+			if (pointValue > 0)
+				// LOGGER.info(String.format("Player has destroyed an enemy worth %d points", actor.getPointValue()));
+				score += pointValue;
 		}
 	}
 	
