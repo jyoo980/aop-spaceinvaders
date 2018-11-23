@@ -13,11 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 
-import util.Logger;
 
 public class ResourceLoader implements ImageObserver {
 	
-	private static final Logger LOGGER = Logger.getInstance();
 	private static ResourceLoader instance = new ResourceLoader();
 	private Map<String,BufferedImage> images = new HashMap<String,BufferedImage>();
 	private Map<String,AudioClip> sounds = new HashMap<String,AudioClip>();
@@ -45,7 +43,7 @@ public class ResourceLoader implements ImageObserver {
 		url = getClass().getClassLoader().getResource("res/" + name);
 		sound = Applet.newAudioClip(url);
 		sounds.put(name,sound);		
-//		LOGGER.trace("Loaded sound file: " + name);
+		//LOGGER.trace("Loaded sound file: " + name);
 
 		return sound;
 	}
@@ -84,7 +82,7 @@ public class ResourceLoader implements ImageObserver {
 		compatible.getGraphics().drawImage(image, 0,0,this);
 
 		images.put(name,compatible);
-		LOGGER.trace("Loaded image file: " + name );	
+		//LOGGER.trace("Loaded image file: " + name );	
 
 		return image;
 	}

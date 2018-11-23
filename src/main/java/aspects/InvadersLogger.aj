@@ -17,7 +17,10 @@ privileged aspect InvadersLogger {
 	
 	pointcut invaderConstructor(): call(Invader.new(..));
 	pointcut addInvaders(): execution(void Invaders.addInvaders(..));
-	pointcut game(Invaders inv): execution(void Invaders.game(..)) && target(inv);
+	pointcut gameOver(): 
+		call(* Invaders.gameOver(..)) && cflow(execution(void Invaders.game(..)));
+	pointcut gameWon(): 
+		call(* Invaders.gameWon(..)) && cflow(execution(void Invaders.game(..)));
 	pointcut markedForRemoval(Actor actr):
 		target(actr) && call(boolean Actor.isMarkedForRemoval(..)) && withincode(void Invaders.updateWorld(..));
 	pointcut handleInput(InputHandler h, KeyEvent ev):
@@ -52,13 +55,20 @@ privileged aspect InvadersLogger {
 		}
 	}
 	
-	void around(Invaders invaderGame): game(invaderGame) {
-		if (invaderGame.gameOver()) {
+	boolean around(): gameOver() {
+		boolean gameOver = proceed();
+		if (gameOver) {
 			Log.trace("Player has lost the game");
-		} else if (invaderGame.gameWon()) {
+		}
+		return gameOver;
+	}
+	
+	boolean around(): gameWon() {
+		boolean gameWon = proceed();
+		if (gameWon) {
 			Log.trace("Player has won the game");
 		}
-		proceed(invaderGame);
+		return gameWon;
 	}
 	
 	private String formatInputString(KeyEvent event) {
