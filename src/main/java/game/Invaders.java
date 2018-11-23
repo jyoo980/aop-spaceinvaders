@@ -279,12 +279,12 @@ public class Invaders extends Stage implements KeyListener {
 				backgroundY = backgroundTile.getHeight();
 
 			if (this.gameOver()) {
-				LOGGER.info("Player has lost the game");
+				// LOGGER.info("Player has lost the game");
 				paintGameOver();
 				break;
 			}
 			else if (this.gameWon()) {
-				LOGGER.info("Player has won the game");
+				// LOGGER.info("Player has won the game");
 				paintGameWon();
 				break;
 			}

@@ -33,7 +33,7 @@ public class InputHandler {
 			}
 
 			else {
-				LOGGER.info(String.format("Player pressed key %s", KeyEvent.getKeyText(event.getKeyCode())));
+				// LOGGER.info(String.format("Player pressed key %s", KeyEvent.getKeyText(event.getKeyCode())));
 				player.keyPressed(event);
 			}
 		}
